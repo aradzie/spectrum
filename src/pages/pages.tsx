@@ -1,9 +1,9 @@
 import { type ExoticComponent, lazy, type ReactNode } from "react";
 
-const ChromaticityPage = lazy(() => import("./ChromaticityPage.tsx"));
-const SpectrumPage = lazy(() => import("./SpectrumPage.tsx"));
-const CmfDataPage = lazy(() => import("./CmfDataPage.tsx"));
-const IlluminantDataPage = lazy(() => import("./IlluminantDataPage.tsx"));
+const ChromaticityPage = lazy(() => import("./page-chromaticity.tsx"));
+const SpectrumPage = lazy(() => import("./page-spectrums.tsx"));
+const CmfDataPage = lazy(() => import("./page-cmf-data.tsx"));
+const IlluminantDataPage = lazy(() => import("./page-illuminant-data.tsx"));
 
 export type Page = { title: ReactNode; component: ExoticComponent };
 
