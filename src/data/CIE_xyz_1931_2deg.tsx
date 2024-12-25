@@ -16,6 +16,7 @@ import meta from "./CIE_xyz_1931_2deg.csv_metadata.json";
 export function CIE_xyz_1931_2deg() {
   return (
     <Chart>
+      <Description.Title meta={meta} />
       <ResponsiveContainer aspect={2}>
         <LineChart
           width={500}

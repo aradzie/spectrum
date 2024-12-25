@@ -16,6 +16,7 @@ import meta from "./CIE_std_illum_D65.csv_metadata.json";
 export function CIE_std_illum_D65() {
   return (
     <Chart>
+      <Description.Title meta={meta} />
       <ResponsiveContainer aspect={2}>
         <LineChart
           width={500}

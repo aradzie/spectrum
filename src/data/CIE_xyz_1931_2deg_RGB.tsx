@@ -18,6 +18,7 @@ export function CIE_xyz_1931_2deg_RGB() {
   const rgb = { r: 0, g: 0, b: 0 };
   return (
     <Chart>
+      <Description.Title meta={meta} />
       <ResponsiveContainer aspect={2}>
         <LineChart
           width={500}
