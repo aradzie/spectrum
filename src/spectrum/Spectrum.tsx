@@ -1,5 +1,18 @@
 import { useEffect, useRef } from "react";
+import {
+  CartesianGrid,
+  Legend,
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
+import { formatRgb } from "../color/color-rgb.ts";
+import type { Rgb } from "../color/types.js";
 import { Canvas, type CanvasRef } from "../components/Canvas.tsx";
+import { dataRgb } from "./data.ts";
 import * as styles from "./Spectrum.module.css";
 
 export function Spectrum() {
@@ -7,24 +20,56 @@ export function Spectrum() {
   useEffect(() => {
     const canvas = canvasRef.current!;
     const context = canvas.getContext("2d")!;
-    const { width, height } = canvas.getSize();
-    context.fillStyle = "red";
-    context.fillRect(0, 0, width, height);
-    const imageData = context.getImageData(0, 0, width, height);
-    for (let i = 0; i < imageData.data.length; i += 4) {
-      const r = imageData.data[i];
-      const g = imageData.data[i + 1];
-      const b = imageData.data[i + 2];
-      const gray = 0.3 * r + 0.59 * g + 0.11 * b;
-      imageData.data[i] = gray;
-      imageData.data[i + 1] = gray;
-      imageData.data[i + 2] = gray;
-    }
-    context.putImageData(imageData, 0, 0);
+    const size = canvas.getSize();
+    paint(context, size);
   }, []);
   return (
     <div className={styles.root}>
       <Canvas ref={canvasRef} />
+      <ResponsiveContainer width={"100%"}>
+        <LineChart
+          data={dataRgb.map(([lambda, r, g, b]) => ({ name: `${lambda}nm`, r, g, b }))}
+          margin={{
+            top: 5,
+            right: 30,
+            left: 20,
+            bottom: 5,
+          }}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="name" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Line type="monotone" dataKey="r" stroke="#f00" dot={false} />
+          <Line type="monotone" dataKey="g" stroke="#0c0" dot={false} />
+          <Line type="monotone" dataKey="b" stroke="#00f" dot={false} />
+        </LineChart>
+      </ResponsiveContainer>
     </div>
   );
+}
+
+function paint(
+  ctx: CanvasRenderingContext2D,
+  {
+    width,
+    height,
+  }: {
+    width: number;
+    height: number;
+  },
+) {
+  ctx.fillStyle = "#fff";
+  ctx.fillRect(0, 0, width, height);
+  const rgb: Rgb = { r: 0, g: 0, b: 0 };
+  for (let i = 0; i < width; i++) {
+    const index = Math.floor((i / width) * dataRgb.length);
+    const [lambda, r, g, b] = dataRgb[index];
+    rgb.r = r;
+    rgb.g = g;
+    rgb.b = b;
+    ctx.fillStyle = formatRgb(rgb);
+    ctx.fillRect(i, 0, 10, height);
+  }
 }

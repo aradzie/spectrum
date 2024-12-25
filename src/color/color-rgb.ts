@@ -14,11 +14,17 @@ export function rgbInGamut({ r, g, b }: Readonly<Rgb>): boolean {
   return r >= 0 && r <= 1 && g >= 0 && g <= 1 && b >= 0 && b <= 1;
 }
 
-const toLinear = (channel: number) =>
-  channel <= 0.04045 ? channel / 12.92 : Math.pow((channel + 0.055) / 1.055, 2.4);
+const toLinear = (v: number) => {
+  const sign = v < 0 ? -1 : 1;
+  const abs = Math.abs(v);
+  return abs <= 0.04045 ? v / 12.92 : sign * Math.pow((abs + 0.055) / 1.055, 2.4);
+};
 
-const toGamma = (channel: number) =>
-  channel <= 0.0031308 ? 12.92 * channel : 1.055 * Math.pow(channel, 1 / 2.4) - 0.055;
+const toGamma = (v: number) => {
+  const sign = v < 0 ? -1 : 1;
+  const abs = Math.abs(v);
+  return abs > 0.0031308 ? sign * (1.055 * Math.pow(abs, 1 / 2.4) - 0.055) : 12.92 * v;
+};
 
 /**
  * Converts a gamma corrected sRGB color to a linear light form.
