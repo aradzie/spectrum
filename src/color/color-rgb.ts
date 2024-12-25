@@ -1,6 +1,18 @@
+import { clamp } from "./clamp.ts";
 import { type Rgb, type Xyz } from "./types.ts";
 
 const tmpRgb: Rgb = { r: 0, g: 0, b: 0 };
+
+export function formatRgb(rgb: Readonly<Rgb>): string {
+  const r = Math.round(clamp(rgb.r) * 255);
+  const g = Math.round(clamp(rgb.g) * 255);
+  const b = Math.round(clamp(rgb.b) * 255);
+  return `rgb(${r} ${g} ${b})`;
+}
+
+export function rgbInGamut({ r, g, b }: Readonly<Rgb>): boolean {
+  return r >= 0 && r <= 1 && g >= 0 && g <= 1 && b >= 0 && b <= 1;
+}
 
 const toLinear = (channel: number) =>
   channel <= 0.04045 ? channel / 12.92 : Math.pow((channel + 0.055) / 1.055, 2.4);

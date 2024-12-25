@@ -1,0 +1,6 @@
+.root {
+  inline-size: 500px;
+  aspect-ratio: 1;
+  margin: 0 auto;
+  outline: 1px dotted red;
+}

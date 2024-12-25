@@ -1,4 +1,5 @@
 import "./App.css";
+import { Chromaticity } from "./chromaticity/Chromaticity.js";
 import { CIE_std_illum_D50 } from "./data/CIE_std_illum_D50.tsx";
 import { CIE_std_illum_D65 } from "./data/CIE_std_illum_D65.tsx";
 import { CIE_xyz_1931_2deg } from "./data/CIE_xyz_1931_2deg.tsx";
@@ -11,6 +12,7 @@ function App() {
   return (
     <>
       <Spectrum />
+      <Chromaticity />
       <CIE_xyz_1931_2deg_RGB />
       <CIE_xyz_1931_2deg />
       <CIE_xyz_1964_10deg_RGB />
