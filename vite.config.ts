@@ -15,6 +15,9 @@ export default defineConfig({
           if (id.includes("node_modules/recharts")) {
             return "vendor-recharts";
           }
+          if (id.includes("node_modules/plotly")) {
+            return "vendor-plotly";
+          }
           if (id.includes("node_modules")) {
             return "vendor";
           }
