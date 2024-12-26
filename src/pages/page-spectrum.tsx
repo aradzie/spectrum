@@ -1,4 +1,4 @@
-import { Spectrum } from "../spectrum/Spectrum.tsx";
+import { SpectrumDiagram } from "../spectrum/SpectrumDiagram.tsx";
 
 export default function Page() {
   return (
@@ -7,7 +7,12 @@ export default function Page() {
       <p>
         Approximating the physically accurate spectrum as closely as possible using the sRGB gamut.
       </p>
-      <Spectrum />
+      <p>
+        For more information see{" "}
+        <a href={"https://aty.sdsu.edu/explain/optics/rendering.html"}>Rendering Spectra</a> by
+        Andrew T. Young.
+      </p>
+      <SpectrumDiagram />
     </article>
   );
 }

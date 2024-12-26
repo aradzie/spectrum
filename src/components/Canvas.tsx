@@ -47,9 +47,13 @@ export function Canvas({ className, id, ref, style, title, ...props }: CanvasPro
     const context = canvas.getContext("2d")!;
     const { width, height } = canvas.getBoundingClientRect();
     const ratio = devicePixelRatio;
-    canvas.width = Math.max(1, width * ratio);
-    canvas.height = Math.max(1, height * ratio);
-    context.scale(ratio, ratio);
+    const newWidth = Math.max(1, width * ratio);
+    const newHeight = Math.max(1, height * ratio);
+    if (canvas.width !== newWidth || canvas.height !== newHeight) {
+      canvas.width = newWidth;
+      canvas.height = newHeight;
+      context.scale(ratio, ratio);
+    }
   }, []);
   return (
     <canvas
