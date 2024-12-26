@@ -1,4 +1,4 @@
-import { pages } from "./pages/pages.js";
+import { pages } from "./pages/pages.tsx";
 
 export function Nav({
   pageIndex,

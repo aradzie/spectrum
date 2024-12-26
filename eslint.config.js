@@ -1,5 +1,6 @@
 import js from "@eslint/js";
 import confusingBrowserGlobals from "confusing-browser-globals";
+import node from "eslint-plugin-n";
 import hooks from "eslint-plugin-react-hooks";
 import simpleImportSort from "eslint-plugin-simple-import-sort";
 import globals from "globals";
@@ -22,6 +23,7 @@ export default ts.config(
     plugins: {
       "react-hooks": hooks,
       "simple-import-sort": simpleImportSort,
+      "node": node,
     },
     rules: {
       ...hooks.configs.recommended.rules,
@@ -39,7 +41,17 @@ export default ts.config(
         { prefer: "type-imports", fixStyle: "inline-type-imports" },
       ],
       "simple-import-sort/imports": ["error", { groups: [["^\\u0000", "^node:", "^", "^\\."]] }],
-      "simple-import-sort/exports": "error",
+      "simple-import-sort/exports": ["error"],
+      "node/file-extension-in-import": ["error", "always"],
+      "node/no-missing-import": ["error"],
+    },
+    settings: {
+      node: {
+        typescriptExtensionMap: [
+          [".ts", ".ts"],
+          [".tsx", ".tsx"],
+        ],
+      },
     },
   },
 );

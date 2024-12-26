@@ -1,7 +1,7 @@
 import "./App.module.css";
 import { useState } from "react";
 import * as styles from "./App.module.css";
-import { Nav } from "./Nav.js";
+import { Nav } from "./Nav.tsx";
 import { pages } from "./pages/pages.tsx";
 
 export function App() {

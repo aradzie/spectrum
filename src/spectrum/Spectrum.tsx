@@ -10,7 +10,7 @@ import {
   YAxis,
 } from "recharts";
 import { formatRgb } from "../color/color-rgb.ts";
-import type { Rgb } from "../color/types.js";
+import { type Rgb } from "../color/types.ts";
 import { Canvas, type CanvasRef } from "../components/Canvas.tsx";
 import { dataRgb } from "./data.ts";
 import * as styles from "./Spectrum.module.css";

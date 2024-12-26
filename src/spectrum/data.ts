@@ -1,6 +1,6 @@
-import { xyzToRgb } from "../color/color-rgb.js";
-import type { Rgb, Xyz } from "../color/types.js";
-import dataXyz from "../data/CIE_xyz_1931_2deg.csv.js";
+import { xyzToRgb } from "../color/color-rgb.ts";
+import { type Rgb, type Xyz } from "../color/types.ts";
+import dataXyz from "../data/CIE_xyz_1931_2deg.csv.ts";
 
 const dataRgb = (() => {
   const xyz: Xyz = { x: 0, y: 0, z: 0 };

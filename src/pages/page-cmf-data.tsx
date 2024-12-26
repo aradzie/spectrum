@@ -1,4 +1,4 @@
-import { Spacer } from "../components/Spacer.js";
+import { Spacer } from "../components/Spacer.tsx";
 import { CIE_xyz_1931_2deg } from "../data/CIE_xyz_1931_2deg.tsx";
 import { CIE_xyz_1931_2deg_RGB } from "../data/CIE_xyz_1931_2deg_RGB.tsx";
 import { CIE_xyz_1964_10deg } from "../data/CIE_xyz_1964_10deg.tsx";

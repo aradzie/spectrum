@@ -8,7 +8,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { xyzToCieRgb } from "../color/color-cie.js";
+import { xyzToCieRgb } from "../color/color-cie.ts";
 import { Chart } from "../components/Chart.tsx";
 import { Description } from "../components/Description.tsx";
 import data from "./CIE_xyz_1931_2deg.csv.ts";
