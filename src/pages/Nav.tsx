@@ -1,21 +1,20 @@
 import { NavLink } from "react-router";
+import * as styles from "./Nav.module.css";
+import { paths } from "./pages.tsx";
 
 export function Nav() {
   return (
-    <nav>
-      <ul>
-        <li>
-          <NavLink to="/">Chromaticity Diagram</NavLink>
-        </li>
-        <li>
-          <NavLink to="/spectrum">Spectrum Diagram</NavLink>
-        </li>
-        <li>
-          <NavLink to="/cmf">Color Matching Functions</NavLink>
-        </li>
-        <li>
-          <NavLink to="/illuminant">Illuminant Spectra</NavLink>
-        </li>
+    <nav className={styles.root}>
+      <ul className={styles.menu}>
+        {Object.entries(paths).map(([path, title]) => {
+          return (
+            <li key={path}>
+              <NavLink to={path} className={styles.link}>
+                {title}
+              </NavLink>
+            </li>
+          );
+        })}
       </ul>
     </nav>
   );
