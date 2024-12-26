@@ -1,19 +1,16 @@
 import "./App.module.css";
-import { useState } from "react";
+import { HashRouter } from "react-router";
 import * as styles from "./App.module.css";
-import { Nav } from "./Nav.tsx";
-import { pages } from "./pages/pages.tsx";
+import { Nav } from "./pages/Nav.tsx";
+import { PageRoutes } from "./pages/pages.tsx";
 
 export function App() {
-  const [pageIndex, setPageIndex] = useState(0);
-  const { title, component: Component } = pages[pageIndex];
   return (
-    <>
-      <Nav pageIndex={pageIndex} onPageIndexChange={setPageIndex} />
+    <HashRouter>
+      <Nav />
       <main className={styles.root}>
-        <h1 className={styles.title}>{title}</h1>
-        <Component />
+        <PageRoutes />
       </main>
-    </>
+    </HashRouter>
   );
 }
