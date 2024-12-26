@@ -25,15 +25,15 @@ export function Spectrum() {
   }, []);
   return (
     <div className={styles.root}>
-      <Canvas ref={canvasRef} />
-      <ResponsiveContainer width={"100%"}>
+      <Canvas ref={canvasRef} style={{ blockSize: "100px" }} />
+      <ResponsiveContainer>
         <LineChart
           data={dataRgb.map(([lambda, r, g, b]) => ({ name: `${lambda}nm`, r, g, b }))}
           margin={{
-            top: 5,
-            right: 30,
-            left: 20,
-            bottom: 5,
+            top: 0,
+            right: 0,
+            left: 0,
+            bottom: 0,
           }}
         >
           <CartesianGrid strokeDasharray="3 3" />
@@ -70,6 +70,6 @@ function paint(
     rgb.g = g;
     rgb.b = b;
     ctx.fillStyle = formatRgb(rgb);
-    ctx.fillRect(i, 0, 10, height);
+    ctx.fillRect(i, 0, 1, height);
   }
 }

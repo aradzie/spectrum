@@ -18,17 +18,7 @@ export function CIE_xyz_1964_10deg() {
     <Chart>
       <Description.Title meta={meta} />
       <ResponsiveContainer aspect={2}>
-        <LineChart
-          width={500}
-          height={300}
-          data={data.map(([lambda, x, y, z]) => ({ name: `${lambda}nm`, x, y, z }))}
-          margin={{
-            top: 5,
-            right: 30,
-            left: 20,
-            bottom: 5,
-          }}
-        >
+        <LineChart data={data.map(([lambda, x, y, z]) => ({ name: `${lambda}nm`, x, y, z }))}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="name" />
           <YAxis />

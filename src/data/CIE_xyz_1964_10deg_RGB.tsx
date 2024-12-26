@@ -21,20 +21,12 @@ export function CIE_xyz_1964_10deg_RGB() {
       <Description.Title meta={meta} />
       <ResponsiveContainer aspect={2}>
         <LineChart
-          width={500}
-          height={300}
           data={data
             .map(([lambda, x, y, z]) => [lambda, x || 0, y || 0, z || 0])
             .map(([lambda, x, y, z]) => {
               xyzToCieRgb({ x, y, z }, rgb);
               return { name: `${lambda}nm`, ...rgb };
             })}
-          margin={{
-            top: 5,
-            right: 30,
-            left: 20,
-            bottom: 5,
-          }}
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="name" />
