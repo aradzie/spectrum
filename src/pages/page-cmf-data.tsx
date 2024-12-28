@@ -3,7 +3,6 @@ import { CIE_xyz_1931_2deg } from "../data/CIE_xyz_1931_2deg.tsx";
 import { CIE_xyz_1931_2deg_RGB } from "../data/CIE_xyz_1931_2deg_RGB.tsx";
 import { CIE_xyz_1964_10deg } from "../data/CIE_xyz_1964_10deg.tsx";
 import { CIE_xyz_1964_10deg_RGB } from "../data/CIE_xyz_1964_10deg_RGB.tsx";
-import { Cmf3D } from "../data/Cmf3D.tsx";
 
 export default function Page() {
   return (
@@ -30,8 +29,6 @@ export default function Page() {
           </a>
         </li>
       </ul>
-      <Cmf3D />
-      <Spacer />
       <CIE_xyz_1931_2deg_RGB />
       <Spacer />
       <CIE_xyz_1931_2deg />

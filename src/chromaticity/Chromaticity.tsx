@@ -85,7 +85,7 @@ function paint(
   ctx.fillStyle = "#fff";
   ctx.fillRect(0, 0, width, height);
   paintSrgbSpace(ctx, width, height, Y, clipLow, clipHigh);
-  paintSpectralLocus(ctx, width, height);
+  paintSpectralLocus2(ctx, width, height);
 }
 
 function paintSrgbSpace(
@@ -117,7 +117,7 @@ function paintSrgbSpace(
         imageData.data[o + 1] = clamp(g) * 255;
         imageData.data[o + 2] = clamp(b) * 255;
         if (!rgbInGamut(rgb)) {
-          imageData.data[o + 3] = 127;
+          // imageData.data[o + 3] = 127;
         }
       }
     }
@@ -154,4 +154,30 @@ function paintSpectralLocus(ctx: CanvasRenderingContext2D, width: number, height
     ctx.lineTo(i1, j1);
     ctx.stroke();
   }
+}
+
+function paintSpectralLocus2(ctx: CanvasRenderingContext2D, width: number, height: number): void {
+  ctx.strokeStyle = "#000";
+  ctx.lineWidth = 1;
+  ctx.stroke(spectralLocusPath(width, height));
+}
+
+function spectralLocusPath(width: number, height: number): Path2D {
+  const path = new Path2D();
+  const [lambda0, X0, Y0, Z0] = data[0];
+  const x0 = X0 / (X0 + Y0 + Z0);
+  const y0 = Y0 / (X0 + Y0 + Z0);
+  const i0 = Math.round(x0 * width);
+  const j0 = Math.round((1 - y0) * height);
+  path.moveTo(i0, j0);
+  for (let index = 1; index < data.length; index++) {
+    const [lambda1, X1, Y1, Z1] = data[index];
+    const x1 = X1 / (X1 + Y1 + Z1);
+    const y1 = Y1 / (X1 + Y1 + Z1);
+    const i1 = Math.round(x1 * width);
+    const j1 = Math.round((1 - y1) * height);
+    path.lineTo(i1, j1);
+  }
+  path.closePath();
+  return path;
 }

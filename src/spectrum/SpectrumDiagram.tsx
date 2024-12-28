@@ -18,7 +18,8 @@ import * as styles from "./SpectrumDiagram.module.css";
 
 export function SpectrumDiagram() {
   const [scale, setScale] = useState(33);
-  const data = useMemo(() => mapData(scale / 100), [scale]);
+  const [normalize, setNormalize] = useState(false);
+  const data = useMemo(() => mapData(scale / 100, normalize), [scale, normalize]);
   const [{ width, height }, setSize] = useState({ width: 0, height: 0 });
   const canvasRef = useRef<CanvasRef>(null);
   useEffect(() => {
@@ -96,15 +97,27 @@ export function SpectrumDiagram() {
           scale
         </label>
       </div>
+      <div>
+        <label>
+          <input
+            type="checkbox"
+            checked={normalize}
+            onChange={(ev) => {
+              setNormalize(ev.target.checked);
+            }}
+          />
+          normalize
+        </label>
+      </div>
     </div>
   );
 }
 
-function mapData(scale: number = 1) {
+function mapData(scale: number, normalize: boolean) {
   scale = clamp(scale);
   const xyz: Xyz = { x: 0, y: 0, z: 0 };
   const rgb: Rgb = { r: 0, g: 0, b: 0 };
-  return data.map(([lambda, x, y, z]) => {
+  const rgbData = data.map(([lambda, x, y, z]) => {
     xyz.x = x * scale;
     xyz.y = y * scale;
     xyz.z = z * scale;
@@ -112,6 +125,22 @@ function mapData(scale: number = 1) {
     const { r, g, b } = rgb;
     return [lambda, r, g, b];
   });
+  if (normalize) {
+    let min = Infinity;
+    let max = -Infinity;
+    for (const [lambda, r, g, b] of rgbData) {
+      min = Math.min(min, r, g, b);
+      max = Math.max(max, r, g, b);
+    }
+    return rgbData.map(([lambda, r, g, b]) => {
+      r = (r - min) / (max - min);
+      g = (g - min) / (max - min);
+      b = (b - min) / (max - min);
+      return [lambda, r, g, b];
+    });
+  } else {
+    return rgbData;
+  }
 }
 
 function paint(
